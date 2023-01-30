@@ -19,8 +19,8 @@ class Semicircle(Figure):
         new_x = int(self.xy[0] + (0.5 * self.radius * np.sin(np.radians(random_angle))))
         new_y = int(self.xy[1] - (0.5 * self.radius * np.cos(np.radians(random_angle))))
 
-        new_w = int(self.radius * np.cos(np.radians(random_angle)) + self.radius / 2 * np.sin(np.radians(random_angle)))
-        new_h = int(self.radius * np.sin(np.radians(random_angle)) + self.radius / 2 * np.cos(np.radians(random_angle)))
+        new_w = abs(int(self.radius * np.cos(np.radians(random_angle)) + self.radius / 2 * np.sin(np.radians(random_angle))))
+        new_h = abs(int(self.radius * np.sin(np.radians(random_angle)) + self.radius / 2 * np.cos(np.radians(random_angle))))
 
         self.output = f"{self.label} {new_x / self.width} {new_y / self.width} {new_w / self.width} {new_h / self.width}"
 

@@ -1,6 +1,5 @@
 venv/
-train/
-test/
-validate/
+generated/
 *.cache
+*.pyc
 assets/
