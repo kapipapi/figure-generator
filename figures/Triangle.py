@@ -7,8 +7,8 @@ from figures.Figure import Figure
 class Triangle(Figure):
     label = 1
 
-    def generate(self):
-        self.init_random()
+    def generate(self, bg: None):
+        self.init_random(bg)
 
         coords = np.array(self.get_shape_coordinates(3, np.random.randint(360, size=1)[0]))
 
@@ -17,4 +17,3 @@ class Triangle(Figure):
         x, y, w, h = cv2.boundingRect(coords)
 
         self.output = f"{self.label} {(x + w / 2) / self.width} {(y + h / 2) / self.width} {(w) / self.width} {(h) / self.width}"
-

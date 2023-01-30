@@ -7,8 +7,8 @@ from figures.Figure import Figure
 class Square(Figure):
     label = 2
 
-    def generate(self):
-        self.init_random()
+    def generate(self, bg: None):
+        self.init_random(bg)
 
         coords = np.array(self.get_shape_coordinates(4, np.random.randint(360, size=1)[0]))
 

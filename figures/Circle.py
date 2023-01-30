@@ -6,8 +6,8 @@ from figures.Figure import Figure
 class Circle(Figure):
     label = 0
 
-    def generate(self):
-        self.init_random()
+    def generate(self, bg=None):
+        self.init_random(bg)
 
         cv2.circle(self.img, self.xy, self.radius, self.color, -1)
 

@@ -9,8 +9,8 @@ from figures.Figure import Figure
 class Quarter(Figure):
     label = 6
 
-    def generate(self):
-        self.init_random()
+    def generate(self, bg: None):
+        self.init_random(bg)
 
         random_angle = random.choice([0, 90, 180, 270])
 

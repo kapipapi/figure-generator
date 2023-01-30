@@ -7,10 +7,11 @@ from figures.Quarter import Quarter
 from figures.Semicircle import Semicircle
 from figures.Square import Square
 from figures.Triangle import Triangle
+from util import get_fragment, load_map
 
 parser = argparse.ArgumentParser(description='Generate figures + labels for YOLOv5.')
-parser.add_argument('destination')
-parser.add_argument('count', type=int)
+parser.add_argument('destination', nargs='?', default="train")
+parser.add_argument('count', nargs='?', type=int, default=1)
 
 '''
     Done:
@@ -46,7 +47,12 @@ if __name__ == "__main__":
         Quarter(),
     ]
 
+    map_img = load_map("./assets/suasorto.tif")
+
     for i in range(args.count):
         for f in figures:
-            f.generate()
+            bg = get_fragment(map_img)
+            f.generate(bg)
+            f.add_reflections()
+            f.merge_with_background()
             f.save(args.destination)
