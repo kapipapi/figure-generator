@@ -54,5 +54,6 @@ if __name__ == "__main__":
             bg = get_fragment(map_img)
             f.generate(bg)
             f.add_reflections()
+            f.add_blur()
             f.merge_with_background()
             f.save(args.destination)

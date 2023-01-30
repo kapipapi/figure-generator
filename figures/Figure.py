@@ -55,17 +55,20 @@ class Figure:
         for c in range(0, 3):
             self.img[:, :, c] = np.array(reflections * self.img[:, :, c], dtype=np.uint8)
 
+    def add_blur(self):
+        self.img = cv2.GaussianBlur(self.img, (5, 5), 5)
+
     def merge_with_background(self):
         assert self.img is not None
         assert self.bg is not None
 
-        mask = np.array(self.img[:, :, 3] == 0, dtype=np.float)
+        mask = self.img[:, :, 3] / 255
         inverted = 1 - mask
 
         output = np.zeros((self.width, self.width, 3), dtype=np.uint8)
 
         for c in range(0, 3):
-            output[:, :, c] = np.array(((inverted * self.img[:, :, c]) + (mask * self.bg[:, :, c])), dtype=np.uint8)
+            output[:, :, c] = np.array(((mask * self.img[:, :, c]) + (inverted * self.bg[:, :, c])), dtype=np.uint8)
 
         self.img = output
 
