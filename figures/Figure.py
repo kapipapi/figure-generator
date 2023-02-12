@@ -1,9 +1,10 @@
+import random
 import uuid
 from os import path
 
 import cv2
 import numpy as np
-from PIL import Image
+from PIL import Image, ImageDraw, ImageFont
 
 
 class Figure:
@@ -43,6 +44,17 @@ class Figure:
         c = np.random.randint(255, size=3)
         self.color = (int(c[0]), int(c[1]), int(c[2]), 255)
 
+    def add_letter(self):
+        font = ImageFont.truetype("./assets/RammettoOne-Regular.ttf", int(self.radius))
+        letter = random.choice(["A", "B", "C"])
+
+        image = Image.fromarray(self.img)
+        draw = ImageDraw.Draw(image)
+        draw.text(self.xy - (self.radius * 0.5, self.radius * 0.85), letter, font=font, fill=(255, 255, 255),
+                  align="center")
+
+        self.img = np.array(image)
+
     def add_reflections(self):
         reflections = np.zeros((self.width, self.width), dtype=np.uint8) + 100
 
@@ -77,9 +89,9 @@ class Figure:
 
         im = Image.fromarray(self.img)
 
-        im.save(path.join(destination, unique_id + '.png'), quality=100, format='png')
+        im.save(path.join("generated", destination, unique_id + '.png'), quality=100, format='png')
 
-        with open(path.join(destination, unique_id + '.txt'), 'w') as f:
+        with open(path.join("generated", destination, unique_id + '.txt'), 'w') as f:
             f.write(self.output)
             f.close()
 

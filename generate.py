@@ -1,5 +1,7 @@
 import argparse
 
+from PIL import ImageFont
+
 from figures.Circle import Circle
 from figures.Hexagon import Hexagon
 from figures.Pentagon import Pentagon
@@ -53,6 +55,7 @@ if __name__ == "__main__":
         for f in figures:
             bg = get_fragment(map_img)
             f.generate(bg)
+            f.add_letter()
             f.add_reflections()
             f.add_blur()
             f.merge_with_background()
