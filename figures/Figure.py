@@ -49,7 +49,7 @@ class Figure:
         self.color = (int(c[0]), int(c[1]), int(c[2]), 255)
 
     def add_letter(self):
-        font = ImageFont.truetype("./assets/RammettoOne-Regular.ttf", int(self.radius * self.text_scale))
+        font = ImageFont.truetype("../assets/RammettoOne-Regular.ttf", int(self.radius * self.text_scale))
         letter = random.choice(["A", "B", "C"])
 
         image = Image.fromarray(self.img)

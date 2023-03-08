@@ -1,6 +1,6 @@
 import argparse
 
-from PIL import ImageFont
+from tqdm import tqdm
 
 from figures.Circle import Circle
 from figures.Hexagon import Hexagon
@@ -51,7 +51,7 @@ if __name__ == "__main__":
 
     map_img = load_map("./assets/suasorto.tif")
 
-    for i in range(args.count):
+    for i in tqdm(range(args.count)):
         for f in figures:
             bg = get_fragment(map_img)
             f.generate(bg)

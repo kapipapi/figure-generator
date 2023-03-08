@@ -25,10 +25,8 @@ class Semicircle(Figure):
         new_x = int(self.xy[0] + (0.5 * self.radius * np.sin(np.radians(random_angle))))
         new_y = int(self.xy[1] - (0.5 * self.radius * np.cos(np.radians(random_angle))))
 
-        new_w = abs(
-            int(self.radius * np.cos(np.radians(random_angle)) + self.radius / 2 * np.sin(np.radians(random_angle))))
-        new_h = abs(
-            int(self.radius * np.sin(np.radians(random_angle)) + self.radius / 2 * np.cos(np.radians(random_angle))))
+        new_w = int(2*self.radius * np.cos(np.radians(random_angle)) + self.radius * np.sin(np.radians(random_angle)))
+        new_h = int(2*self.radius * np.sin(np.radians(random_angle)) + self.radius * np.cos(np.radians(random_angle)))
 
         self.output = f"{self.label} {new_x / self.width} {new_y / self.width} {new_w / self.width} {new_h / self.width}"
 
@@ -40,5 +38,14 @@ if __name__ == "__main__":
     f.add_reflections()
     f.add_blur()
     f.merge_with_background()
-    cv2.imshow("test", f.img)
+
+    img = f.img
+    bbox = np.array(f.output.split(" "), dtype=float)[1:] * f.width
+
+    print(bbox)
+
+    img = cv2.rectangle(img, (int(bbox[0] - bbox[2] // 2), int(bbox[1] - bbox[3] // 2)),
+                        (int(bbox[0] + bbox[2] // 2), int(bbox[1] + bbox[3] // 2)), 255, 3)
+
+    cv2.imshow("test", img)
     cv2.waitKey(10000)
