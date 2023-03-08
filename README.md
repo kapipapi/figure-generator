@@ -20,3 +20,5 @@ run training
 ```bash
 python train.py --data figures.yaml --weights yolov5l.pt --epochs 10 --batch-size 8
 ```
+
+# integrate yolo + tesseract for text reading 
