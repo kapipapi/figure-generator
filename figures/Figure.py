@@ -8,6 +8,10 @@ from PIL import Image, ImageDraw, ImageFont
 
 
 class Figure:
+    text_scale = 1.0
+    text_angle_offset = 0
+    text_offset = (0, 0)
+
     def __init__(self):
         self.width = 640
 
@@ -45,12 +49,13 @@ class Figure:
         self.color = (int(c[0]), int(c[1]), int(c[2]), 255)
 
     def add_letter(self):
-        font = ImageFont.truetype("./assets/RammettoOne-Regular.ttf", int(self.radius))
+        font = ImageFont.truetype("./assets/RammettoOne-Regular.ttf", int(self.radius * self.text_scale))
         letter = random.choice(["A", "B", "C"])
 
         image = Image.fromarray(self.img)
         draw = ImageDraw.Draw(image)
-        draw.text(self.xy - (self.radius * 0.5, self.radius * 0.85), letter, font=font, fill=(255, 255, 255),
+        draw.text(self.xy - (self.radius * 0.5, self.radius * 0.85) + self.text_offset, letter, font=font,
+                  fill=(255, 255, 255),
                   align="center")
 
         self.img = np.array(image)

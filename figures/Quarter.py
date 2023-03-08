@@ -9,10 +9,16 @@ from figures.Figure import Figure
 class Quarter(Figure):
     label = 6
 
-    def generate(self, bg: None):
+    def generate(self, bg=None):
         self.init_random(bg)
 
         random_angle = random.choice([0, 90, 180, 270])
+
+        self.text_scale = 0.5
+        self.text_offset = (
+            self.radius * 0.5 * (np.cos(np.radians(45)) + np.cos(np.radians(random_angle - 90 - 45))),
+            self.radius * 0.5 * (np.sin(np.radians(45)) + np.sin(np.radians(random_angle - 90 - 45)))
+        )
 
         cv2.ellipse(self.img, self.xy, (self.radius, self.radius), random_angle, 180, 270, self.color, -1)
 
@@ -32,5 +38,9 @@ class Quarter(Figure):
 if __name__ == "__main__":
     f = Quarter()
     f.generate()
+    f.add_letter()
+    f.add_reflections()
+    f.add_blur()
+    f.merge_with_background()
     cv2.imshow("test", f.img)
     cv2.waitKey(10000)
