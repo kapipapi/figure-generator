@@ -48,8 +48,8 @@ class Figure:
         c = np.random.randint(255, size=3)
         self.color = (int(c[0]), int(c[1]), int(c[2]), 255)
 
-    def add_letter(self):
-        font = ImageFont.truetype("../assets/RammettoOne-Regular.ttf", int(self.radius * self.text_scale))
+    def add_letter(self, font_path):
+        font = ImageFont.truetype(font_path, int(self.radius * self.text_scale))
         letter = random.choice(["A", "B", "C"])
 
         image = Image.fromarray(self.img)

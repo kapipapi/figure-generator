@@ -1,4 +1,5 @@
 import argparse
+import os
 
 from tqdm import tqdm
 
@@ -50,12 +51,19 @@ if __name__ == "__main__":
     ]
 
     map_img = load_map("./assets/suasorto.tif")
+    font_path = "./assets/RammettoOne-Regular.ttf"
+
+    if not os.path.exists("generated"):
+        os.mkdir("generated")
+        os.mkdir("generated/train")
+        os.mkdir("generated/test")
+        os.mkdir("generated/valid")
 
     for i in tqdm(range(args.count)):
         for f in figures:
             bg = get_fragment(map_img)
             f.generate(bg)
-            f.add_letter()
+            f.add_letter(font_path)
             f.add_reflections()
             f.add_blur()
             f.merge_with_background()
