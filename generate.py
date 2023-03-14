@@ -53,11 +53,9 @@ if __name__ == "__main__":
     map_img = load_map("./assets/suasorto.tif")
     font_path = "./assets/RammettoOne-Regular.ttf"
 
-    if not os.path.exists("generated"):
-        os.mkdir("generated")
-        os.mkdir("generated/train")
-        os.mkdir("generated/test")
-        os.mkdir("generated/valid")
+    os.makedirs("generated/train", exist_ok=True)
+    os.makedirs("generated/test", exist_ok=True)
+    os.makedirs("generated/valid", exist_ok=True)
 
     for i in tqdm(range(args.count)):
         for f in figures:

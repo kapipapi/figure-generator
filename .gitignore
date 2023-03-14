@@ -3,3 +3,4 @@ generated/
 *.cache
 *.pyc
 assets/
+/figures/
