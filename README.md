@@ -1,4 +1,8 @@
-# figure generator
+# YOLO training figure generator
+copy figures repo (different from this one)
+```bash
+git clone git@github.com:kapipapi/figures.git
+```
 
 generate figures with command
 ```bash
